@@ -7,11 +7,11 @@ model = YOLO('petbottlesv8_v1.pt')
 class_labels = model.names if hasattr(model, 'names') else ['class_0', 'class_1', 'class_2'] 
 
 # Initialize the camera
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 if not cap.isOpened():
     print("Error: Could not open video stream.")
-    exit()
+    exit() 
 
 while True:
     ret, frame = cap.read()

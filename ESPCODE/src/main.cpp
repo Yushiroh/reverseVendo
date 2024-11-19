@@ -18,11 +18,13 @@ void loop() {
 
   if(but1State == 0){
 
-    Serial.println("but1");
+    Serial.print("A");
+    delay(1000);
 
   }else if(but2State == 0){
 
-    Serial.println("but2");
+    Serial.print("B");
+    delay(1000);
 
   }else{
     //Serial.println("NO INPUT");

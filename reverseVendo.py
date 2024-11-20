@@ -4,7 +4,9 @@ import cv2 as cv
 import serial
 import time
 from ultralytics import YOLO
+from Adafruit_Thermal import *
 
+printer = Adafruit_Thermal('COM5', 9600, timeout=5)
 ser = serial.Serial('COM6', 9600, timeout=1)
 data = ser.read(1)
 
@@ -22,6 +24,15 @@ cap = cv.VideoCapture(0)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
+
+def receiptMake():
+    printer.justify('C')
+    printer.println("Reverse Vendo Transaction")
+    printer.println("")
+    printer.justify('L')
+
+    for  i in range(5):
+        printer.println(f"{transactList[i]} ........ PHP {listPrices[i]}.00")
 
 def appender(itemDetected):
 
@@ -80,6 +91,12 @@ while True:
 
             elif(input_data == 'B'):
                 print("AYY")
+                if len(transactList) > 0:
+                    receiptMake()
+                    transactList.clear()
+                    listPrices.clear()
+                else:
+                    print("no list!")
 
         except Exception as e:
             print(e)
